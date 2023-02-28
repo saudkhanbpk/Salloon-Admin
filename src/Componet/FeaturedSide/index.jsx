@@ -8,7 +8,7 @@ import rated_pro from '../../assets/img/rated_pro.png'
 import {GiRoundStar} from 'react-icons/gi'
 import ReactStars from "react-rating-stars-component";
 
-class FeaturedSide extends Component 
+class FeaturedSide extends Component {
     render () {
         return (
                         <div className="right_sidebar">

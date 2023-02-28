@@ -8,7 +8,7 @@ import { HiChevronRight } from "react-icons/hi";
 import appoin from "../../assets/img/appoin.png";
 import appoin2 from "../../assets/img/appoin2.png";
 import appoin3 from "../../assets/img/appoin3.png";
-import { Dropdown } from "react-bootstrap"; 
+import { Dropdown } from "react-bootstrap";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -285,9 +285,7 @@ class Calendar extends Component {
           start: data.Appointment_Date,
           id: 1,
           // url: data.Appointment_Date,
-
         });
-
       } else {
         let addAppo = filters[indexx].id + 1;
         filters[indexx] = {
@@ -305,7 +303,6 @@ class Calendar extends Component {
     });
 
     return filters;
-
   };
   getAppointmentsBYStaff = (id) => {
     let data = {
@@ -612,7 +609,7 @@ class Calendar extends Component {
           <HeaderNav />
           <div className="main_details_pro">
             <div className="row m-0 ">
-              <div className="col-md-12">
+              <div className="col-md-12 mb-3">
                 <div className="products_main_title backrarrow_main">
                   <h2> Calendar </h2>
                   <button
@@ -714,7 +711,7 @@ class Calendar extends Component {
                     </Dropdown>
                   </div>
                 </div>
-                <div className="calendar_main mt-4">
+                {/* <div className="calendar_main mt-4">
                   <FullCalendar
                     defaultDate={this.state.initialSelectedDate}
                     defaultView="dayGridMonth"
@@ -739,9 +736,10 @@ class Calendar extends Component {
                     dateClick={this.handleDateClick}
                     eventClick={this.eventClick}
                   />
-                </div>
+                </div> */}
               </div>
-              <div className="col-md-4">
+              <MyCalendar />
+              <div className="col-md-4 mt-3">
                 <div className="admin_sidebar_right h-100">
                   <div className="top_search_filer">
                     <div className="serach_box">
@@ -759,17 +757,18 @@ class Calendar extends Component {
                   </div>
                   <h5 className="mt-4">All Bookings</h5>
                   <div className="add_new_pro">
-                    {this.state.profile && this.state.profile.role == "staff" && (
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => {
-                          this.setState({ AddModal: true });
-                        }}
-                      >
-                        Create New Appointment
-                      </button>
-                    )}
+                    {this.state.profile &&
+                      this.state.profile.role == "staff" && (
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() => {
+                            this.setState({ AddModal: true });
+                          }}
+                        >
+                          Create New Appointment
+                        </button>
+                      )}
                   </div>
                   {this.state.bookingLoader && (
                     <div className="mt-5">
@@ -965,12 +964,13 @@ class Calendar extends Component {
                                   this.setState({ time: data });
                                 }
                               }}
-                              className={`btn   ${this.state.bookedSlots.includes(data)
-                                ? "disable"
-                                : this.state.time == data
+                              className={`btn   ${
+                                this.state.bookedSlots.includes(data)
+                                  ? "disable"
+                                  : this.state.time == data
                                   ? "active"
                                   : ""
-                                }`}
+                              }`}
                             >
                               {data}
                             </button>
@@ -1004,10 +1004,10 @@ class Calendar extends Component {
                               {!this.state.checkedService.includes(
                                 data._id
                               ) && (
-                                  <div>
-                                    <div className="unChecked"></div>
-                                  </div>
-                                )}
+                                <div>
+                                  <div className="unChecked"></div>
+                                </div>
+                              )}
 
                               <div>{data.Name}</div>
                             </div>
@@ -1029,7 +1029,7 @@ class Calendar extends Component {
                           type="button"
                           className="btn btn-primary"
                           onClick={() => this.booking()}
-                        // onClick={() => this.props.history.push('/bookinginfo')}
+                          // onClick={() => this.props.history.push('/bookinginfo')}
                         >
                           Book Appointment
                         </button>
@@ -1038,8 +1038,8 @@ class Calendar extends Component {
                         <button
                           type="button"
                           className="btn btn-primary"
-                        // onClick={() => this.booking()}
-                        // onClick={() => this.props.history.push('/bookinginfo')}
+                          // onClick={() => this.booking()}
+                          // onClick={() => this.props.history.push('/bookinginfo')}
                         >
                           Loading....
                         </button>
@@ -1168,8 +1168,8 @@ class Calendar extends Component {
             </div>
           </Modal.Body>
         </Modal>
-        <MyCalendar />
-        { }
+
+        {}
       </>
     );
   }

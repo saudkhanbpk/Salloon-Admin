@@ -12,7 +12,7 @@ import { RiSettings3Line } from "react-icons/ri";
 import { BiPurchaseTag } from "react-icons/bi";
 import { BiLogOut } from "react-icons/bi";
 import { FiMessageSquare } from "react-icons/fi";
-import {GiSaloon} from "react-icons/gi";
+import { GiSaloon } from "react-icons/gi";
 import logo from "../../assets/img/logo.png";
 import { VscGraph } from "react-icons/vsc";
 import logo_img from "../../assets/imge/newimages/d.png";
@@ -66,18 +66,19 @@ class SideNav extends Component {
                   <RiFileList2Line /> <span>Calendar</span>{" "}
                 </NavLink>
               </li>
+
               {this.state.profile && this.state.profile.role == "admin" && (
                 <li>
-                  <NavLink exact activeClassName="active" to="/add-on">
-                    <AiOutlineShoppingCart /> <span>Add-Ons</span>{" "}
+                  <NavLink exact activeClassName="active" to="/orders">
+                    <BiBorderAll /> <span>Appointments</span>{" "}
                   </NavLink>
                 </li>
               )}
 
               {this.state.profile && this.state.profile.role == "admin" && (
                 <li>
-                  <NavLink exact activeClassName="active" to="/manage-staff">
-                    <HiOutlineUserGroup /> <span>Manage Staff</span>{" "}
+                  <NavLink exact activeClassName="active" to="/add-on">
+                    <AiOutlineShoppingCart /> <span>Add-Ons</span>{" "}
                   </NavLink>
                 </li>
               )}
@@ -90,10 +91,11 @@ class SideNav extends Component {
                   <BsInbox /> <span>Services</span>{" "}
                 </NavLink>
               </li>
+
               {this.state.profile && this.state.profile.role == "admin" && (
                 <li>
-                  <NavLink exact activeClassName="active" to="/orders">
-                    <BiBorderAll /> <span>Appointments</span>{" "}
+                  <NavLink exact activeClassName="active" to="/deals-offers">
+                    <BiPurchaseTag /> <span>Deals & Offers</span>{" "}
                   </NavLink>
                 </li>
               )}
@@ -106,13 +108,7 @@ class SideNav extends Component {
                   <RiSettings3Line /> <span>Help & Support</span>{" "}
                 </NavLink>
               </li>
-              {this.state.profile && this.state.profile.role == "admin" && (
-                <li>
-                  <NavLink exact activeClassName="active" to="/deals-offers">
-                    <BiPurchaseTag /> <span>Deals & Offers</span>{" "}
-                  </NavLink>
-                </li>
-              )}
+
               <li>
                 <NavLink exact activeClassName="active" to="/EditProfile">
                   <BiUser /> <span>Edit Profile</span>{" "}
@@ -127,6 +123,14 @@ class SideNav extends Component {
               )}
 
               <li>
+                {this.state.profile && this.state.profile.role == "admin" && (
+                  <li>
+                    <NavLink exact activeClassName="active" to="/manage-staff">
+                      <HiOutlineUserGroup /> <span>Manage Staff</span>{" "}
+                    </NavLink>
+                  </li>
+                )}
+
                 <a
                   exact
                   activeClassName="active"

@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import React from 'react'
 import SideNav from '../../Componet/navs/sideNav';
-import { Dropdown } from 'react-bootstrap'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
 
 import Multiselect from 'multiselect-react-dropdown';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -44,25 +44,29 @@ const Priceselect = [
         value: "Percentage",
     },
 ]
-const CurrencyDropDown = () => {
-    return (
-      <>
-        <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            USD
-          </Dropdown.Toggle>
-  
-          <Dropdown.Menu className='eurodropdown'>
-            {/* <Dropdown.Item href="#/action-1">Dkk </Dropdown.Item> */}
-            <Dropdown.Item>Euro</Dropdown.Item>
-            <Dropdown.Item>DKK</Dropdown.Item>
-            <Dropdown.Item>Sek</Dropdown.Item>
-            <Dropdown.Item>Nok</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </>
-    )
-  }
+// const CurrencyDropDown = (value) => {
+//     return (
+//         <>
+//             <DropdownButton title={value}>
+//                 <Dropdown.Item onClick={() => this.handleItemClick('USD')}>
+//                     Dkk
+//                 </Dropdown.Item>
+//                 <Dropdown.Item onClick={() => this.handleItemClick('KDD')}>
+//                     Euro
+//                 </Dropdown.Item>
+//                 <Dropdown.Item onClick={() => this.handleItemClick('PKR')}>
+//                     USD
+//                 </Dropdown.Item>
+//                 <Dropdown.Item onClick={() => this.handleItemClick('PKR')}>
+//                     Sek
+//                 </Dropdown.Item>
+//                 <Dropdown.Item onClick={() => this.handleItemClick('PKR')}>
+//                     Nok
+//                 </Dropdown.Item>
+//             </DropdownButton>
+//         </>
+//     )
+// }
 const AddProductSchema = Yup.object().shape({
     name: Yup.string()
         .required('name is required'),
@@ -70,7 +74,7 @@ const AddProductSchema = Yup.object().shape({
         .required('category is Required'),
     description: Yup.string()
         .required('description is Required'),
-        price:Yup.string()
+    price: Yup.string()
         .required('price is Required'),
     service: Yup.string()
         .required('service is Required'),
@@ -89,9 +93,19 @@ const AddProductSchema = Yup.object().shape({
 class AddDeals extends Component {
 
     state = {
-        category: []
+        category: [],
+        value: 'USD'
+
     }
 
+    // toggleDropdown = () => {
+    //     this.setState({ isOpen: !this.state.isOpen });
+    // };
+    handleItemClick = (value) => {
+        // Do something with the selected value
+        console.log('Selected value:', value);
+        this.setState({ value: value });
+    }
 
     componentDidMount() {
         let token = localStorage.getItem('token')
@@ -111,11 +125,10 @@ class AddDeals extends Component {
             }
         })
     }
- 
 
 
-    render() 
-    {
+
+    render() {
         return (
             <>
 
@@ -128,7 +141,7 @@ class AddDeals extends Component {
                                     <h2> <FiChevronLeft onClick={() => this.props.history.push('/deals-offers')} /> {this.state.EditeId ? "Update" : "Add"}  Offers</h2>
                                 </div>
                                 <Formik
-                                    initialValues={{ name: '', category: '',price:"", code: "", description: '', discount: "", usage: "", service: "", dateStart: "", dateEnd: "" }}
+                                    initialValues={{ name: '', category: '', price: "", code: "", description: '', discount: "", usage: "", service: "", dateStart: "", dateEnd: "" }}
                                     validationSchema={AddProductSchema}
                                     onSubmit={(values) => {
 
@@ -137,8 +150,8 @@ class AddDeals extends Component {
                                             Saloon_id: profile.id,
                                             Coupon_name: values.name,
                                             Start_Date: values.dateStart,
-                                            Price:values.price,
-                                            Discount:values.discount,
+                                            Price: values.price,
+                                            Discount: values.discount,
                                             Percentage: values.discount,
                                             Description: values.description,
                                             Service: values.service,
@@ -149,7 +162,7 @@ class AddDeals extends Component {
                                         Api.addCoupon(data).then((res) => {
                                             if (res.data.Error == false) {
                                                 toast.success("Deal Successfully Added")
-                                               this.props.history.push("/deals-offers")
+                                                this.props.history.push("/deals-offers")
                                             }
                                         })
                                     }}
@@ -196,17 +209,36 @@ class AddDeals extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="col-md-6">
-                                            <div className="main_employee_form with_price">
-                                                <label htmlFor="">Price</label>
-                                                <div className="main_price_box">
-                                                <Field type="text" name="price" as={MyInput} />
-                                                   <Field as={CurrencyDropDown} />
-                                                   </div>
-                                                {(errors.price && touched.price) ? <div className="formik-error">{errors.price}</div> : null}
+                                                        <div className="main_employee_form with_price">
+                                                            <label htmlFor="">Price</label>
+                                                            <div className="main_price_box">
+                                                                <Field type="text" name="price" as={MyInput} />
+
+                                                                {/* <Field as={CurrencyDropDown} value={this.state.value} /> */}
+                                                                <DropdownButton title={this.state.value}>
+                                                                        <Dropdown.Item onClick={() => this.handleItemClick('Dkk')}>
+                                                                            Dkk
+                                                                        </Dropdown.Item>
+                                                                        <Dropdown.Item onClick={() => this.handleItemClick('Euro')}>
+                                                                            Euro
+                                                                        </Dropdown.Item>
+                                                                        <Dropdown.Item onClick={() => this.handleItemClick('USD')}>
+                                                                            USD
+                                                                        </Dropdown.Item>
+                                                                        <Dropdown.Item onClick={() => this.handleItemClick('Sek')}>
+                                                                            Sek
+                                                                        </Dropdown.Item>
+                                                                        <Dropdown.Item onClick={() => this.handleItemClick('Nok')}>
+                                                                            Nok
+                                                                        </Dropdown.Item>
+                                                                    </DropdownButton>
+
+                                                            </div>
+                                                            {(errors.price && touched.price) ? <div className="formik-error">{errors.price}</div> : null}
 
 
-                                            </div>
-                                        </div>
+                                                        </div>
+                                                    </div>
                                                     <div className="col-md-6">
                                                         <div className="main_employee_form">
                                                             <label htmlFor="">Service</label>
@@ -229,10 +261,10 @@ class AddDeals extends Component {
                                                     <div className="col-md-6">
                                                         <div className="main_employee_form">
                                                             <label htmlFor="">Date start</label>
-                                                            <Field 
-                                                             type="date" 
-                                                             min={moment().format('YYYY-MM-DD')} 
-                                                             name="dateStart" as={MyInput} />
+                                                            <Field
+                                                                type="date"
+                                                                min={moment().format('YYYY-MM-DD')}
+                                                                name="dateStart" as={MyInput} />
                                                             {(errors.dateStart && touched.dateStart) ? <div className="formik-error">{errors.dateStart}</div> : null}
 
                                                         </div>
@@ -240,12 +272,12 @@ class AddDeals extends Component {
                                                     <div className="col-md-6">
                                                         <div className="main_employee_form">
                                                             <label htmlFor="">Date end</label>
-                                                            <Field 
-                                                             type="date" 
-                                                             disabled={!values.dateStart} 
-                                                             min={values.dateStart} 
-                                                             name="dateEnd" 
-                                                             as={MyInput} />
+                                                            <Field
+                                                                type="date"
+                                                                disabled={!values.dateStart}
+                                                                min={values.dateStart}
+                                                                name="dateEnd"
+                                                                as={MyInput} />
                                                             {(errors.dateEnd && touched.dateEnd) ? <div className="formik-error">{errors.dateEnd}</div> : null}
 
                                                         </div>

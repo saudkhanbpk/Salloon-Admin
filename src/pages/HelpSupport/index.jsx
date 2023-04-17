@@ -65,7 +65,7 @@ export class index extends Component {
             <HeaderNav />
             <div className='newReqHeadings'>
                                         <div className="products_main_title backrarrow_main">
-                                            <h2>Help And Support</h2>
+                                            <h2>Help & Support</h2>
                                         </div>
                                     </div>
                                     
@@ -139,9 +139,7 @@ export class index extends Component {
           </form>
         </div>
           </div>
-        </div>
-      
-      
+        </div>     
         </div>
         </div>   
     );

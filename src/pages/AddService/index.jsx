@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import SideNav from '../../Componet/navs/sideNav'
 import { FiChevronLeft } from 'react-icons/fi'
-import { Dropdown } from 'react-bootstrap'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { BsFillPlusCircleFill } from 'react-icons/bs'
 import img_ip from '../../assets/imge/newimages/Group 21269.png'
 import { useHistory } from 'react-router'
@@ -27,6 +27,8 @@ const MyInput = (props) => {
         </>
     );
 };
+
+
 const MyInputTextArea = (props) => {
     return (
         <>
@@ -34,27 +36,36 @@ const MyInputTextArea = (props) => {
         </>
     );
 };
-const CurrencyDropDown = () => {
+const CurrencyDropDown = ({ currency, setCurrency }) => {
+    // console.log(currency);
+    const handleSelect = (e) => {
+      console.log(e);
+      setCurrency(e)
+    }
     return (
-        <>
-            <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    USD
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    <Dropdown.Item>Euro</Dropdown.Item>
-                    <Dropdown.Item>USD</Dropdown.Item>
-                    <Dropdown.Item>Sek</Dropdown.Item>
-                    <Dropdown.Item>Nok</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-        </>
+      <>
+       
+        <DropdownButton
+          alignRight
+          title={currency}
+          id="dropdown-menu-align-right"
+          onSelect={handleSelect}
+        >
+          <Dropdown.Item  eventKey="Dkk">Dkk</Dropdown.Item>
+          <Dropdown.Item eventKey="Euro">Euro</Dropdown.Item>
+          <Dropdown.Item eventKey="USD">USD</Dropdown.Item>
+          <Dropdown.Item eventKey="Sek">Sek</Dropdown.Item>
+          <Dropdown.Item eventKey="Nok">Nok</Dropdown.Item>
+        </DropdownButton>
+      </>
     )
-}
+  }
 const AddServices = () => {
     const [profileimage, setProfileimg] = useState({});
     const [image, setImage] = useState("")
+    const [currency, setCurrency] = useState('Dkk')
+
+    
     const [images, setHideImg] = useState(false)
     const fileUpload = useRef(null);
     const [intervals, setIntervals] = useState([])
@@ -184,7 +195,11 @@ const AddServices = () => {
                                                 <label htmlFor="">Price</label>
                                                 <div className="main_price_box">
                                                     <Field type="text" name="price" as={MyInput} />
-                                                    <Field as={CurrencyDropDown} />
+                                                    <Field
+                                                     as={CurrencyDropDown}
+                                                     currency={currency}
+                                                     setCurrency={setCurrency}
+                                                     />
                                                 </div>
                                                 {(errors.price && touched.price) ? <div className="formik-error">{errors.price}</div> : null}
 

@@ -20,13 +20,14 @@ import products from "../../assets/img/Feature-Snippet-lines.png";
 import N5PLzyan from "../../assets/imge/N5PLzyan.jpg";
 import SideNav from "../../Componet/navs/sideNav";
 import Other from "../../api/Other";
-
 import ReactStars from "react-rating-stars-component";
 import { withRouter } from "react-router-dom";
 import HeaderNav from "../../Componet/HeaderNav";
-import { Dropdown, DropdownButton } from "react-bootstrap";
+
 
 class Index extends Component {
+ 
+
   state = {
     coupons: null,
     oneTime: false,
@@ -123,7 +124,7 @@ class Index extends Component {
                       id="uncontrolled-tab-example"
                       className="mangestafeTabls"
                     >
-                      <Tab eventKey="all" title="All">
+                     <Tab eventKey="all" title="All">
                         <div className="row mt-3 ">
                           {this.state.coupons &&
                             this.state.coupons.map((data) => {
@@ -158,7 +159,7 @@ class Index extends Component {
                                         <h5 className="couponm">
                                           {data.Coupon_name}
                                         </h5>
-                                        {/* <h5><b>Manicure Pedicure</b></h5> */}
+                                     
                                       </div>
                                       {data.Category == "" ? (
                                         <div className="">
@@ -176,7 +177,8 @@ class Index extends Component {
                                           <h5>
                                             Discount
                                             <br />
-                                            <b>{data.Discountprice.toFixed() }$</b>
+                                            <b>{data.Discountprice}$</b>
+
                                           </h5>
                                         </div>
                                       )}
@@ -191,7 +193,7 @@ class Index extends Component {
                                             }
                                           >
                                             {data?.Price ? data.Price : "N/A"}$
-                                            {/* <del>400$</del> */}
+                                            
                                           </b>
                                         </h5>
                                       </div>
@@ -210,7 +212,7 @@ class Index extends Component {
                             })}
                         </div>
                       </Tab>
-
+                      
                       <Tab eventKey="One_Time" title="One-time offer">
                         <div className="row mt-3">
                           {this.state.coupons &&
@@ -249,7 +251,6 @@ class Index extends Component {
                                         <h5 className="couponm">
                                           {data.Coupon_name}
                                         </h5>
-                                        {/* <h5><b>Manicure Pedicure</b></h5> */}
                                       </div>
                                       {data.Category == "" ? (
                                         <div className="">
@@ -267,7 +268,7 @@ class Index extends Component {
                                           <h5>
                                             Discount
                                             <br />
-                                            <b>{data.Discountprice.toFixed()}$</b>
+                                            <b>{data?.Discountprice}$</b>
                                           </h5>
                                         </div>
                                       )}
@@ -282,7 +283,6 @@ class Index extends Component {
                                             }
                                           >
                                             {data?.Price ? data.Price : "N/A"}$
-                                            {/* <del>400$</del> */}
                                           </b>
                                         </h5>
                                       </div>
@@ -334,7 +334,6 @@ class Index extends Component {
                                     <div className="dealInfo">
                                       <div>
                                         <h5>{data.Coupon_name}</h5>
-                                        {/* <h5><b>Manicure Pedicure</b></h5> */}
                                       </div>
                                       {data.Category == "" ? (
                                         <div className="">
@@ -352,7 +351,7 @@ class Index extends Component {
                                           <h5>
                                             Discount
                                             <br />
-                                            <b>{data.Discountprice.toFixed()}$</b>
+                                            <b>{data.Discountprice}$</b>
                                           </h5>
                                         </div>
                                       )}
@@ -367,7 +366,6 @@ class Index extends Component {
                                             }
                                           >
                                             {data?.Price ? data.Price : "N/A"}$
-                                            {/* <del>400$</del> */}
                                           </b>
                                         </h5>
                                       </div>
@@ -419,7 +417,6 @@ class Index extends Component {
                                     <div className="dealInfo">
                                       <div>
                                         <h5>{data.Coupon_name}</h5>
-                                        {/* <h5><b>Manicure Pedicure</b></h5> */}
                                       </div>
                                       {data.Category == "" ? (
                                         <div className="">
@@ -437,7 +434,7 @@ class Index extends Component {
                                           <h5>
                                             Discount
                                             <br />
-                                            <b>{data.Discountprice.toFixed()}$</b>
+                                            <b>{data.Discountprice}$</b>
                                           </h5>
                                         </div>
                                       )}
@@ -452,7 +449,6 @@ class Index extends Component {
                                             }
                                           >
                                             {data?.Price ? data.Price : "N/A"}$
-                                            {/* <del>400$</del> */}
                                           </b>
                                         </h5>
                                       </div>

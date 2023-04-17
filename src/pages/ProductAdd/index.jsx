@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from '../../Componet/navs/sideNav'
-import { Dropdown } from 'react-bootstrap'
+import { Dropdown, DropdownButton } from 'react-bootstrap'
 import { FiChevronLeft } from 'react-icons/fi'
 import img_ip from '../../assets/imge/newimages/Group 21269.png'
 import { BsFillPlusCircleFill } from 'react-icons/bs'
@@ -28,28 +28,38 @@ const MyInputTextArea = (props) => {
   );
 };
 
-const CurrencyDropDown = () => {
+// const handleSelect = (e) => {
+//   console.log(e);
+// }
+
+const CurrencyDropDown = ({ currency, setCurrency }) => {
+  // console.log(currency);
+  const handleSelect = (e) => {
+    console.log(e);
+    setCurrency(e)
+  }
   return (
     <>
-      <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          DKK
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu className='eurodropdown'>
-          {/* <Dropdown.Item href="#/action-1">Dkk </Dropdown.Item> */}
-          <Dropdown.Item>Euro</Dropdown.Item>
-          <Dropdown.Item>USD</Dropdown.Item>
-          <Dropdown.Item>Sek</Dropdown.Item>
-          <Dropdown.Item>Nok</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+     
+      <DropdownButton
+        alignRight
+        title={currency}
+        id="dropdown-menu-align-right"
+        onSelect={handleSelect}
+      >
+        <Dropdown.Item eventKey="Dkk">Dkk</Dropdown.Item>
+        <Dropdown.Item eventKey="Euro">Euro</Dropdown.Item>
+        <Dropdown.Item eventKey="USD">USD</Dropdown.Item>
+        <Dropdown.Item eventKey="Sek">Sek</Dropdown.Item>
+        <Dropdown.Item eventKey="Nok">Nok</Dropdown.Item>
+      </DropdownButton>
     </>
   )
 }
 const ProductAdd = () => {
   const fileUpload = useRef(null);
   const [categories, setCategories] = useState(null)
+  const [currency, setCurrency] = useState('Dkk')
 
   const AddProductSchema = Yup.object().shape({
     productName: Yup.string()
@@ -155,7 +165,12 @@ const ProductAdd = () => {
                       <label htmlFor="">Price</label>
                       <div className="main_price_box">
                         <Field type="text" name="price" placeholder="Price" as={MyInput} />
-                        <Field as={CurrencyDropDown} />
+                        <Field
+                          as={CurrencyDropDown}
+                          currency={currency}
+                          setCurrency={setCurrency}
+                        />
+                        {/* <CurrencyDropDown/> */}
                         {(errors.price && touched.price) ? <div className="formik-error">{errors.price}</div> : null}
                       </div>
                     </div>
